@@ -9,7 +9,6 @@ const Company = db.define('company', {
   },
   fractal_index: {
     type: DECIMAL(4, 1),
-    allowNull: false,
   }
 });
 

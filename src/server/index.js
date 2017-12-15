@@ -16,6 +16,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 })); // parse URL requests
 
+// api routes
+app.use('/api', require('./api'));
+
 // static routing for /client/ path
 app.use(express.static(path.join(__dirname, '..', 'client')));
 

@@ -5,7 +5,6 @@ Company.hasMany(Employee, {
   foreignKey:'company_id',
   targetKey: 'company_id',
   constraints: false,
-  as: 'Moola'
 });
 
 module.exports = {
