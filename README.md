@@ -4,9 +4,9 @@
 We want to create an app for benchmarking an engineer's coding and communication skills against other engineers that work at similar companies and with the same title (e.g. Junior Engineer)
 
 # Instructions
--[ ] Write a function that takes a candidate_id and returns their percentile for their coding and communication score compared to other candidates at the same title and at similar companies.
--[ ] Write a React app that allows a user to enter their candidate id and see their percentiles.
--[ ] Please add automated tests as you see fit.
+- [ ] Write a function that takes a candidate_id and returns their percentile for their coding and communication score compared to other candidates at the same title and at similar companies.
+- [ ] Write a React app that allows a user to enter their candidate id and see their percentiles.
+- [ ] Please add automated tests as you see fit.
 
 # Data
 - `score-records.csv` contains the coding and communication scores for all of the users in our sample dataset (https://s3.amazonaws.com/simple-fractal-recruiting/score-records.csv)
