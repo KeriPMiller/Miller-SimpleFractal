@@ -5,7 +5,7 @@ module.exports = router;
 router.use('/company', require('./company'))
 
 // employee router routes
-// router.use('/employee', require('./employee'))
+router.use('/employee', require('./employee'))
 
 // Error Handeling
 router.use(( req, res, next) => {

@@ -17,7 +17,7 @@ const Employee = db.define('employee', {
   },
   title: {
     type: ENUM,
-    values: ['active', 'pending', 'deleted']
+    values: ['Engineer', 'Senior Engineer']
     }
 });
 

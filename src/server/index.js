@@ -25,17 +25,9 @@ app.use(express.static(path.join(__dirname, '..', 'client')));
 
 app.use(express.static(__dirname + './../../')); //serves the index.html
 
-db.sync({
-    force: true
-  })
+db.sync()
   .then(() => {
     console.log('db synced')
     app.listen(3000, () => console.log(`I hear something rustling on port 3000`));
   })
   .catch(err => console.log(err));
-
-
-// // Error handling
-// app.use((err, req, res, next) =>
-//   res.status(err.status || 500).send(err.message || 'Internal sever error.')
-// );
