@@ -447,6 +447,9 @@ const seed = () =>
     Promise.all(employees.map(employee =>
       Employee.create(employee)))
   )
+  .then(() => {
+    console.log('Seeded! Cmd-c to exit');
+  });
 
 
 const main = () => {
