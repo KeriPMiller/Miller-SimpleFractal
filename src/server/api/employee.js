@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 
 //  GET api/employee/:candidate_id
 router.get('/:candidate_id', (req, res, next) => {
-  Company.find({
+  Employee.findOne({
       where: {candidate_id: req.params.candidate_id}
     })
     .then(employee => res.json(employee))

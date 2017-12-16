@@ -43,7 +43,13 @@ class App extends Component {
 
   handleSubmit(event){
     event.preventDefault();
-    console.log('submit');
+    axios.get(`/api/employee/${event.target.candidateId.value}`)
+    .then(res => res.data)
+    .then( employee => {
+      this.setState({targetEmployee: employee})
+    });
+    console.log('submit',this.state.targetEmployee,
+     'here', this.state.targetCompany);
   }
 
   render() {
