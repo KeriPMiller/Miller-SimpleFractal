@@ -8,12 +8,13 @@ class App extends Component {
       employees: [],
       companies: [],
       candidateId: '',
-      companyId: '',
+      similarCanidates: [],
       targetEmployee: [],
-      targetCompany: [],
+      percentile: '',
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.percentile = this.percentile.bind(this);
   }
 
   componentDidMount(){
@@ -21,12 +22,6 @@ class App extends Component {
     .then(res => res.data)
     .then(employees => {
       this.setState({employees})
-    });
-
-    axios.get('/api/company/2')
-    .then(res => res.data)
-    .then( company => {
-      this.setState({targetCompany: company})
     });
 
     axios.get('/api/company/')
@@ -43,22 +38,37 @@ class App extends Component {
 
   handleSubmit(event){
     event.preventDefault();
+    // get target Candidate
     axios.get(`/api/employee/${event.target.candidateId.value}`)
     .then(res => res.data)
     .then( employee => {
       this.setState({targetEmployee: employee})
-    });
-    console.log('submit',this.state.targetEmployee,
-     'here', this.state.targetCompany);
+    })
+    .catch(err => {console.log('not found!', err)});
+
+    // get similar candidates
+    console.log('submit',this.state.targetEmployee)
+     this.percentile(this.state.targetEmployee);
+  }
+
+  getSimilarCanidates()
+  percentile(employee){
+    let totalScore;
+   axios.get(`/api/employee/company/${employee.company_id}`)
+    .then(res => res.data)
+    .then( otherEmployees =>  {
+        otherEmployees.map(singleEmployee => {
+          totalScore += singleEmployee.score;
+        })
+      })
+
   }
 
   render() {
     return (
       <div>
-        <h1>Hello from the App Component</h1>
-        { this.state.employees.length &&
-          this.state.companies.length &&
-          console.log(this.state)}
+        <h2>Percentile Lookup</h2>
+          {console.log(this.state)}
           <form onSubmit={this.handleSubmit}>
             <label>Candidate Id:</label>
             <input
@@ -66,16 +76,11 @@ class App extends Component {
               type='text'
               value={this.state.candidateId}
               onChange={this.handleChange} ></input>
-            <label>Company Id</label>
-            <select
-              name='companyId'
-              value={this.state.companyId}
-              onChange={this.handleChange}>
-              {this.state.companies.map(company => (
-                <option key={company.id} value={company.company_id}>{company.company_id}</option>
-              ))}
-            </select>
               <input type='submit' value='submit' />
+              <div className="messageBox">
+                <h3>this candidate is in the {this.state.percentile}
+                    percentile for the role of {this.state.targetEmployee.title} compaired to similar companies</h3>
+              </div>
           </form>
       </div>
 
