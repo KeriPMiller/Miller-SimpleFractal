@@ -1,3 +1,16 @@
+# commands
+
+* `createdb simpleFractal` run seed with `npm run seed`
+
+* build and start server with `npm run start-dev`
+
+Navigate over to localhost:3000
+
+
+
+
+
+
 [Challenge Link](https://s3.amazonaws.com/simple-fractal-recruiting/README.md)
 
 # Objective
