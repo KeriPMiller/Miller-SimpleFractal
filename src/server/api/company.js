@@ -9,7 +9,8 @@ module.exports = router;
 router.get('/', (req, res, next) => {
   Company.findAll({
       include: [{
-        model: Employee      }]
+        model: Employee
+      }]
     })
     .then(companies => res.json(companies))
     .catch(next);
@@ -17,8 +18,13 @@ router.get('/', (req, res, next) => {
 
 //  GET api/company/:company_id
 router.get('/:companyId', (req, res, next) => {
-  Company.find({
-      where: {company_id: req.params.companyId}
+  Company.findOne({
+      where: {
+        company_id: req.params.companyId
+      }
+    }, { include: [{
+        model: Employee
+      }]
     })
     .then(company => res.json(company))
     .catch(next);

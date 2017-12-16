@@ -1,4 +1,9 @@
-const { INTEGER, ENUM, STRING } = require('sequelize');
+const {
+  INTEGER,
+  ENUM,
+  STRING,
+  VIRTUAL
+} = require('sequelize');
 const db = require('../db');
 
 const Employee = db.define('employee', {
@@ -18,7 +23,13 @@ const Employee = db.define('employee', {
   title: {
     type: ENUM,
     values: ['Engineer', 'Senior Engineer']
+  }
+}, {
+  getterMethods: {
+    score: function() {
+      return this.communication_score + this.coding_score
     }
+  }
 });
 
 module.exports = Employee;
